@@ -1,0 +1,70 @@
+.sidebar{
+    background-color: rgb(100, 94, 102);
+    height: 100%;
+    color: white;
+    overflow-y: auto;
+    padding-left:20px ;
+    
+
+}
+
+.sidebar-title{
+    font-weight: bold;
+    font-size: larger;
+    padding-top: 20px ;
+    
+}
+input::placeholder{
+    color: rgb(233, 231, 234);
+}
+
+img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+}
+.search{
+    margin: 10px 0px;
+    max-width: 90% ;
+    display: flex;
+
+    
+}
+
+.searchName{
+    background-color:  rgb(173, 161, 177);
+    border-radius: 5px;
+    border: transparent;
+    outline: none;
+    max-width: 90% ;
+}
+.userlist{
+    margin-top: 20px;
+}
+
+.user-content{
+    display: flex;
+    margin-top: 10px;
+    
+}
+
+.user-pic{
+    flex: 2;
+}
+
+.user-name{
+    flex: 9;
+    position: relative;
+    top: 6px;
+    font-size: small;
+    cursor: pointer;
+}
+
+.user-content:hover{
+    background-color: rgb(87, 86, 87);
+    border-radius: 20px;
+    padding: 2px;
+}
+
+
+

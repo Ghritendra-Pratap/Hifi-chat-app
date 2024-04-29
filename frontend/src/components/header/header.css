@@ -1,0 +1,15 @@
+/* Header */
+.header {
+    background-color: #007bff; /* Blue background color */
+    color: #ffffff; /* White text color */
+    padding: 20px;
+    text-align: center;
+  }
+  
+  /* Header title */
+  .header-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+  }
+  

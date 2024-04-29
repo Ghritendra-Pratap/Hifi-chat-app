@@ -1,0 +1,17 @@
+.home{
+  height: 80vh;
+  margin: auto;
+  width: 80%;
+  border: 3px solid #73AD21;
+  display: flex;
+  
+
+}
+
+.sidebar-item{
+    flex: 4;
+}
+
+.chatwindow-item{
+    flex: 8;
+}
