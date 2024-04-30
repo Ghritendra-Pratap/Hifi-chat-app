@@ -24,7 +24,7 @@ app.use("/api/auth", authRoute);
 app.use("/api/chat", messageRoute);
 app.use("/api/user", userRoute);
 
-// Serve static files with the correct MIME type
+
 app.use(express.static(path.join(__dirname, '..', 'frontend', 'dist')));
 
 app.get("*", (req, res) => {
