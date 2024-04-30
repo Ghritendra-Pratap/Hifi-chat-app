@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 import './register.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { useAuthContext } from '../../../context/AuthContext';
 
 const Register = () => {
+  const navigate = useNavigate();
+  const { setAuthUser } = useAuthContext();
   const [formData, setFormData] = useState({
     fullname: '',
     username: '',
     password: '',
-    confirmPassword: '',
+    cpassword: '',
     gender: '', // State to store selected gender
   });
 
@@ -16,16 +20,27 @@ const Register = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    // Add form submission logic here
     console.log('Form submitted:', formData);
+    const res = await axios.post('/api/auth/signup', formData);
+    console.log(res.data)
+      if (res.data) {
+        
+        localStorage.setItem('chat-user', JSON.stringify(res.data));
+        setAuthUser(res.data);
+        navigate('/chat');
+      } else {
+        setError('Invalid username or password. Please try again.');
+      }
+    // Add form submission logic here
+    
     // Reset form fields after submission
     setFormData({
       fullname: '',
       username: '',
       password: '',
-      confirmPassword: '',
+      cpassword: '',
       gender: '',
     });
   };
@@ -69,9 +84,9 @@ const Register = () => {
             <div className='register-content'>
               <input
                 type='password'
-                name='confirmPassword'
+                name='cpassword'
                 placeholder='Confirm Password'
-                value={formData.confirmPassword}
+                value={formData.cpassword}
                 onChange={handleChange}
                 required
               />
@@ -87,14 +102,13 @@ const Register = () => {
                 <option value=''>Select Gender</option>
                 <option value='male'>Male</option>
                 <option value='female'>Female</option>
-                <option value='other'>Other</option>
               </select>
             </div>
             <button type='submit' className='registerButton'>
               Register
             </button>
           </form>
-          <p style={{ fontSize: 12 }}>
+          <p style={{ fontSize: 12, color:'black'}}>
             Already have an account{' '}
             <span className='signup-nav' style={{ color: 'blue', fontWeight: 900, cursor: 'pointer' }}>
               <Link to='/'>Login here</Link>

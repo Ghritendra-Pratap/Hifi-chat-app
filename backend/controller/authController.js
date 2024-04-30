@@ -4,9 +4,9 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
  const signup = async(req , res)=>{
-
     try{
-        const {fullname , username, password, cpassword, gender, profilepic} = req.body
+        console.log(req.body)
+        const {fullname , username, password, cpassword, gender} = req.body
     if(password !== cpassword){
        return res.status(400).json("Password and confirm password do not matched")
     }
