@@ -12,7 +12,7 @@ const Chatwindow = ({ context }) => {
 
   const fetchConversation = async () => {
     const msg = await axios.get(
-      "http://localhost:5000/api/chat/" + context[1],
+      "/api/chat/" + context[1],
       {
         headers: { authorization: authUser.token }
       }
@@ -23,7 +23,7 @@ const Chatwindow = ({ context }) => {
 
   const sendMessage = async () => {
     if(message){
-      const res = await axios.post("http://localhost:5000/api/chat/send/"+context[1] , {message} , {
+      const res = await axios.post("/api/chat/send/"+context[1] , {message} , {
         headers: { authorization: authUser.token }
       }) 
       console.log(res.data)
@@ -34,7 +34,7 @@ const Chatwindow = ({ context }) => {
 
   const getReceiverData = async () => {
     const receiver = await axios.get(
-      "http://localhost:5000/api/user/" + context[1],
+      "/api/user/" + context[1],
       {
         headers: { authorization: authUser.token },
       }

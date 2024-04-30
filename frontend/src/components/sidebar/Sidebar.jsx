@@ -35,7 +35,7 @@ const Sidebar = () => {
   
 
   const fetchUser = async () => {
-    const users = await axios.get("http://localhost:5000/api/user", {
+    const users = await axios.get("/api/user", {
       headers: { authorization: authUser.token },
     });
     setAllUsers(users.data);

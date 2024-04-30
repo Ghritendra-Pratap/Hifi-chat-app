@@ -17,7 +17,7 @@ const Login = () => {
         username: username,
         password: password
       };
-      const res = await axios.post('http://127.0.0.1:5000/api/auth/login', user);
+      const res = await axios.post('/api/auth/login', user);
       if (res.data) {
         localStorage.setItem('chat-user', JSON.stringify(res.data));
         setAuthUser(res.data);
