@@ -1,4 +1,5 @@
 const User = require("../models/User")
+
 const sidebarUsers = async(req,res)=>{
     const loggedInUser = req.user._id
     const allUsers = await User.find({_id: {$ne: loggedInUser} }).select("-password")

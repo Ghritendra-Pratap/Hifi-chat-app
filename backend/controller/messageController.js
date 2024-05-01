@@ -1,5 +1,6 @@
 const Conversation = require("../models/Conversation");
 const Message = require("../models/Message");
+const { getReceiverSocketId, io } = require("../socket/socket");
 
 
 const sendMessage=async(req,res)=>{
@@ -29,6 +30,11 @@ const sendMessage=async(req,res)=>{
         }
 
         await Promise.all([conversation.save(), newMessage.save() ])
+
+        const receiverSocketId = getReceiverSocketId(receiverId);
+        if(receiverSocketId){
+            io.to(receiverSocketId).emit("newMessage", newMessage)
+        }
         res.status(201).json("message sent ")
 
     }catch(err){

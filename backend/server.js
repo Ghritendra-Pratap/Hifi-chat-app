@@ -1,5 +1,4 @@
 const express = require('express');
-const app = express();
 const dotenv = require('dotenv');
 const connectingDB = require('./config/connectDB');
 const authRoute = require('./routes/authRoute');
@@ -8,6 +7,7 @@ const userRoute = require('./routes/userRoute');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const path = require('path');
+const { app, server } = require('./socket/socket');
 
 dotenv.config();
 app.use(cookieParser());
@@ -31,7 +31,7 @@ app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'frontend', 'dist', 'index.html'));
 });
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
     connectingDB();
     console.log(`Server is running at port ${PORT}`);
 });

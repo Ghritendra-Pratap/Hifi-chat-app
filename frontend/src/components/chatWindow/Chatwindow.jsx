@@ -2,6 +2,10 @@ import React, { useEffect, useState, useRef } from "react";
 import "./chatwindow.css";
 import axios from "axios";
 import { useAuthContext } from "../../../context/AuthContext";
+import { useSocketContext } from "../../../context/socketContext";
+import Realtime from "../hooks/Realtime";
+
+
 
 const Chatwindow = ({ context }) => {
   const { authUser } = useAuthContext();
@@ -9,6 +13,11 @@ const Chatwindow = ({ context }) => {
   const [conversation, setConversation] = useState();
   const [message , setMessage] = useState("");
   const msgContainerRef = useRef(null); // Reference for the message container
+ 
+  
+
+  Realtime(conversation , setConversation)
+ 
 
   const fetchConversation = async () => {
     const msg = await axios.get(
@@ -18,6 +27,7 @@ const Chatwindow = ({ context }) => {
       }
     );
     setConversation(msg.data);
+    console.log("Converstaion: ",conversation)
   };
  
 
@@ -46,6 +56,7 @@ const Chatwindow = ({ context }) => {
     if (context) {
       getReceiverData();
       fetchConversation();
+      
     }
   }, [context]);
 
