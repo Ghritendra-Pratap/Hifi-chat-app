@@ -123,11 +123,12 @@ const Chatwindow = ({ context }) => {
           <input
             type="text"
             className="msginput-field"
+            placeholder=" Type message here......"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            onKeyPress={handleKeyPress} // Call handleKeyPress function on key press
+            onKeyPress={handleKeyPress} 
           />
-          {/* <button type="submit" className="msginput-button" onClick={sendMessage}>send</button> */}
+          
         </div>
       </form>
     </div>

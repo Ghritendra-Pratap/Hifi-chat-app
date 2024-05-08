@@ -1,6 +1,10 @@
 /* Chat window container */
 .chatwindow {
-  background-color: #292929;
+  background-color: rgba(87, 12, 87, 0.5);
+  background-image: url('chat.gif');
+  background-repeat: no-repeat; 
+  background-position: center center;
+  border: transparent !important;
   color: #fff;
   overflow: hidden;
   box-sizing: border-box;
@@ -9,6 +13,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  border-radius: 10px;
 }
 
 /* Header containing user info */
@@ -16,7 +21,7 @@
   padding: 10px 20px;
   display: flex;
   align-items: center;
-  background-color: #1a1a1a;
+  background-color: #442645;
 }
 
 /* User profile image */
@@ -31,7 +36,9 @@
 .namenstatus {
   flex: 1;
   font-size: 14px;
-  color: #b3b3b3;
+  font-weight: 900;
+  color:white;
+
 }
 
 /* Message container */
@@ -51,13 +58,13 @@
 }
 
 .msgwindow.sent {
-  background-color: #2979ff;
+  background-color: #e79fe8;
   text-align: right;
   margin-left: auto
   
 }
 .msgwindow.received {
-  background-color: #4caf50;
+  background-color: #729674;
   text-align: left;
 }
 
@@ -71,7 +78,7 @@
   display: flex;
   align-items: center;
   padding: 10px;
-  background-color: #1a1a1a;
+  background-color: #442645;
 }
 
 .msginput-field {
@@ -80,7 +87,7 @@
   border-radius: 20px;
   border: none;
   outline: none;
-  background-color: #333;
+  background-color: #5e5b5b;
   color: #fff;
 }
 

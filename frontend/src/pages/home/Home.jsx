@@ -9,17 +9,20 @@ const Home = () => {
     
   return (
     <div className='home'>
+      <div className='homewrapper'>
       <div className="sidebar-item">
       
-        <Sidebar/>
+      <Sidebar/>
+    
+    </div>
+    <div className="chatwindow-item">
       
+        <Chatwindow context={conversationUser}/>
+      
+      
+    </div>
       </div>
-      <div className="chatwindow-item">
-        
-          <Chatwindow context={conversationUser}/>
-        
-        
-      </div>
+      
     </div>
   )
 }

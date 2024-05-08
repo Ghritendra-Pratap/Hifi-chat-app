@@ -3,6 +3,7 @@ import './login.css';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuthContext } from '../../../context/AuthContext';
+import Header from '../../components/header/Header';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -35,20 +36,26 @@ const Login = () => {
   return (
     <div className='login'>
       <div className='wrapper'>
+        <div className='login-img'><img src='/chat.gif'/></div>
         <h2 className='login-header'>LOGIN </h2>
         <div className='login-contents'>
           <div className='login-content'>
-            <input type='text' placeholder='Username' value={username} onChange={(e) => setUsername(e.target.value)} />
+            <input type='text' className="loginInput" placeholder='Username' value={username} onChange={(e) => setUsername(e.target.value)} />
           </div>
           <div className='login-content'>
-            <input type='password' placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)} />
+            <input type='password' className="loginInput" placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)} />
           </div>
+          <div className='login-content'>
           <button type='submit' className='loginButton' onClick={handleLogin}>
             Login
-          </button>
+          </button>          
+          </div>
+          
           {error && <p className='error-message'>{error}</p>}
-          <p style={{ fontSize: 12 }}>
-            Don't have an account?{' '}
+          <p style={{ fontSize: 12 , display: "flex", /* Use flexbox */
+  justifyContent: "center", /* Center horizontally */
+  alignItems: "center", color:"black" }}>
+            Don't have an account?
             <span className='signup-nav' style={{ color: 'blue', fontWeight: 900, cursor: 'pointer' }}>
               <Link to='register'>Register here</Link>
             </span>

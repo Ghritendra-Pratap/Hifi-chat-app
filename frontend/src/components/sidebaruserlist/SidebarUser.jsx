@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useConversationContext } from "../../../context/ConversationContext";
 import { useSocketContext } from "../../../context/socketContext";
 import { useAuthContext } from "../../../context/AuthContext";
+import './sidebaruser.css'
 
 const SidebarUser = (user) => {  
   const { setConversationUser } = useConversationContext();
@@ -18,12 +19,14 @@ const SidebarUser = (user) => {
   return (
       <div className="user-content">
         <div className="user-pic">
+        {isOnline ? <img src="/activedot2.png" className="active-status"/> : null}
+          
           <img src={user.user.profilepic} alt="photo" />
         </div>
         <div className="user-name" onClick={() => setParticipants()}>
           <div className="namee">{user.user.username}</div>
           <div className="lastmsg" style={{ fontSize: 10 }}>
-            {user.user.username} {isOnline ? "on" : "off"}
+            {user.user.username} 
           </div>
         </div>
       </div>

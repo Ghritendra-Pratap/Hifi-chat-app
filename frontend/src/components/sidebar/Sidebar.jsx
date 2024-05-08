@@ -55,7 +55,7 @@ const Sidebar = () => {
           value={searchVal}
           onChange={(e) => setSearchVal(e.target.value)}
         />
-        <button onClick={handleSearchClick}>search</button>
+        <img src="/search.png"  className="search-img" onClick={handleSearchClick}/>
         <div className="searchIcon"></div>
       </div>
       <div className="userlist">
