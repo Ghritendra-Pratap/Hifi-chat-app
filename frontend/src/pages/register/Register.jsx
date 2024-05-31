@@ -38,7 +38,6 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
     const res = await axios.post('/api/auth/signup', formData);
     console.log(res.data);
     if (res.data) {

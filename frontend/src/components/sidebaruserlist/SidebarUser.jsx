@@ -18,7 +18,6 @@ const SidebarUser = (user) => {
       headers: { authorization: authUser.token },
     })
     {message.data && setLastMessage(message.data)}
-    console.log("message" , message)
   }
   
     const setParticipants = () => {

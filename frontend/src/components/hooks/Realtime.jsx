@@ -3,7 +3,6 @@ import { useSocketContext } from '../../../context/socketContext';
 
 const Realtime = (conversation , setConversation ) => {
     const {socket} =useSocketContext();
-    console.log("socket: ", socket.id)
 
     useEffect(()=>{
         socket?.on("newMessage" , (newMessage)=>{

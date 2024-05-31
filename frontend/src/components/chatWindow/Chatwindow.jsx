@@ -17,7 +17,8 @@ const Chatwindow = ({ context }) => {
   const [image, setImage] = useState("");
   const msgContainerRef = useRef(null); // Reference for the message container
 
- 
+
+  Realtime(conversation, setConversation );
 
   const fetchConversation = async () => {
     const msg = await axios.get(
@@ -69,15 +70,15 @@ const Chatwindow = ({ context }) => {
 
   useEffect(() => {
     if (context) {
-
       getReceiverData();
       fetchConversation();
+      
       setMessage("");
       setImage("");
     }
   }, [context]);
 
-  // Realtime(conversation, setConversation );
+  
 
   useEffect(() => {
     // Scroll to the bottom of the message container when conversation updates
