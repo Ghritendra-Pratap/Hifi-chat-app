@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import { useSocketContext } from '../../../context/socketContext';
 
-const Realtime = (conversation , setConversation) => {
+const Realtime = (conversation , setConversation ) => {
     const {socket} =useSocketContext();
-    console.log("socket: ", socket)
+    console.log("socket: ", socket.id)
 
     useEffect(()=>{
         socket?.on("newMessage" , (newMessage)=>{

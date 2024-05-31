@@ -13,8 +13,15 @@ const messageSchema = new mongoose.Schema({
     },
     message:{
         type:String,
-        required:true
-    }
+        
+    },
+    image: 
+        {
+            type: String,  // URL of the image
+           // filename: String,  // Filename of the image
+            // Add more properties as needed (e.g., size, type, etc.)
+        }
+    
 },{timestamps:true})
 
 module.exports = new mongoose.model("Message" , messageSchema)

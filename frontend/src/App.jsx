@@ -5,14 +5,14 @@ import Register from './pages/register/Register'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './App.css'
 function App() {
-  
+  const token = localStorage.getItem("chat-user")
 
   return (
     
     <BrowserRouter>
-    <Header/>
+    
       <Routes>
-        <Route path="/" element={<Login/>}/>
+        <Route path="/" element= {token ? <Home/>:<Login/>}/>
         <Route path="/register" element={<Register/>}/>
         <Route path="/chat" element={<Home/>}/>
         

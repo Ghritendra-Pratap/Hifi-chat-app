@@ -1,6 +1,6 @@
 /* Chat window container */
 .chatwindow {
-  background-color: rgba(87, 12, 87, 0.5);
+  background-color: white;
   background-image: url('chat.gif');
   background-repeat: no-repeat; 
   background-position: center center;
@@ -13,7 +13,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  border-radius: 10px;
+  border-radius: 20px;
 }
 
 /* Header containing user info */
@@ -21,7 +21,7 @@
   padding: 10px 20px;
   display: flex;
   align-items: center;
-  background-color: #442645;
+  background-color: #6d789f;
 }
 
 /* User profile image */
@@ -51,48 +51,87 @@
 /* Individual message */
 .msgwindow {
   width: fit-content;
-  padding: 2px 20px;
   margin-bottom: 10px;
   border-radius: 20px;
   
 }
 
 .msgwindow.sent {
-  background-color: #e79fe8;
   text-align: right;
   margin-left: auto
   
 }
+
+
+
+.message-wrapper.sent .image{
+  background-color: #e79fe8;
+  padding: 3px;
+  border-radius: 2px;
+}
+
+.message-wrapper.sent .message{
+  background-color: #e79fe8;
+  padding: 10px 20px;
+  border-radius: 15px 15px 2px 15px;
+}
 .msgwindow.received {
-  background-color: #729674;
   text-align: left;
 }
 
-.timestamp{
-  padding-top: 4px;
-  font-size: 10px;
+.message-wrapper.received .image{
+  background-color: #729674;
+  padding: 3px;
+  border-radius: 2px;
+  
+  
 }
 
+.message-wrapper.received .message{
+  background-color: #729674;
+  padding: 10px 20px;
+  border-radius: 15px 15px 15px 2px;
+}
+
+
+.timestamp{
+  padding-top: 4px;
+  font-size: 8px;
+  color: black;
+}
+
+.no-msg{
+  position: absolute; /* Position the div relative to its closest positioned ancestor */
+  top: 75%; /* Move the top of the div to the middle of the parent container */
+  left: 50%; /* Move the left of the div to the middle of the parent container */
+  transform: translate(-50%, -50%);
+  
+}
 /* Message input field */
 .msginput {
   display: flex;
   align-items: center;
   padding: 10px;
-  background-color: #442645;
+  background-color: #d7d6d6;
+  
+  
+ 
 }
 
 .msginput-field {
   flex: 1;
-  padding: 10px;
+  margin-left: 10px;
+  padding-left: 10px;
   border-radius: 20px;
   border: none;
   outline: none;
-  background-color: #5e5b5b;
-  color: #fff;
+  background-color: #f1efef;
+  color: black;
+  
 }
 
 .msginput-field::placeholder {
-  color: #b3b3b3;
+  color:black;
 }
 
 .msginput-button {

@@ -10,7 +10,12 @@ const conversationSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref:"Message",
         default:[]
-    }]
+    }],
+    lastmessage:{
+        type:String,
+        default:""
+
+    }
 },{timestamps:true})
 
 module.exports = new mongoose.model("Conversataion" , conversationSchema )

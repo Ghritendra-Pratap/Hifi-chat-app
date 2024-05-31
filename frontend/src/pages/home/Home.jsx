@@ -16,7 +16,6 @@ const Home = () => {
     
     </div>
     <div className="chatwindow-item">
-      
         <Chatwindow context={conversationUser}/>
       
       

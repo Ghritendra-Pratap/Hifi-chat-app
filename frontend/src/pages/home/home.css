@@ -3,17 +3,19 @@
 }
 
 .homewrapper{
-  background-color:rgb(137, 114, 143, 0.7);
-  margin: 30px 200px;
+  
+  margin: 50px 200px;
   border-radius: 10px;
   display: flex;
   padding: 10px;
   height: 78vh;
+  grid-gap: 20px;
   
 }
 
 .sidebar-item{
   flex: 4;
+  
 }
 
 .chatwindow-item{

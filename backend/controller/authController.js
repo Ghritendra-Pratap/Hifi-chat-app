@@ -1,3 +1,4 @@
+const  cloudinary_js_config  = require("../config/cloudinary")
 const generateToken = require("../config/generateJwt")
 const User = require("../models/User")
 const bcrypt = require('bcrypt')
@@ -6,7 +7,8 @@ const jwt = require('jsonwebtoken')
  const signup = async(req , res)=>{
     try{
         
-        const {fullname , username, password, cpassword, gender} = req.body
+    const {fullname , username, password, cpassword, gender, image} = req.body
+
     if(password !== cpassword){
        return res.status(400).json("Password and confirm password do not matched")
     }
@@ -24,18 +26,22 @@ const jwt = require('jsonwebtoken')
     const boypp = `https://avatar.iran.liara.run/public/boy?username=${username}`
     const girlpp = `https://avatar.iran.liara.run/public/girl?username=${username}`
 
+    const result = await cloudinary_js_config.uploader.upload(image,{
+        folder:'profilepic',
+    })
     const newUser = new User({
         fullname,
         username,
         password: hashedPassword,
         gender,
-        profilepic: gender === 'male' ? boypp : girlpp
+        profilepic : result.secure_url
+       // profilepic: gender === 'male' ? boypp : girlpp
     })
 
     if(newUser){
         
         await newUser.save()
-        const token = jwt.sign({id : newUser._id} , `${process.env.JWT_SECRET_KEY}` , {
+        const token = jwt.sign({id : newUser._id} , process.env.JWT_SECRET_KEY , {
             expiresIn:'15d'
         })
         return res.status(201).json({
@@ -45,7 +51,7 @@ const jwt = require('jsonwebtoken')
             token:token
         })
     }else{
-        res.status(400).json({error :"Invalid user data"})
+        return res.status(400).json({error :"Invalid user data"})
     }
 
    
@@ -67,7 +73,7 @@ const jwt = require('jsonwebtoken')
         }
 
         //generateToken(user._id , res)
-        const token = jwt.sign({id : user._id} , `${process.env.JWT_SECRET_KEY}` , {
+        const token = jwt.sign({id : user._id} , process.env.JWT_SECRET_KEY , {
             expiresIn:'15d'
         })
 

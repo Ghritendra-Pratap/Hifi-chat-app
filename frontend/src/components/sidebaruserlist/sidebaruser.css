@@ -1,7 +1,8 @@
 .active-status{
     position: relative;
-    top: -30px;
-    width: 10px;
-    height: 10px;
-    left: 35px;
+    width: 12px;
+    height: 12px;
+    right: 12px;
 }
+
+.user-pic{}

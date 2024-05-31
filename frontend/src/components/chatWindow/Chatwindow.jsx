@@ -2,43 +2,45 @@ import React, { useEffect, useState, useRef } from "react";
 import "./chatwindow.css";
 import axios from "axios";
 import { useAuthContext } from "../../../context/AuthContext";
-import { useSocketContext } from "../../../context/socketContext";
 import Realtime from "../hooks/Realtime";
-
-
+import MessageList from "./MessageList"
+import ChatInput from "./ChatInput";
+import { useSocketContext } from "../../../context/socketContext";
 
 const Chatwindow = ({ context }) => {
   const { authUser } = useAuthContext();
+  const {onlineUsers} = useSocketContext();
   const [receiverData, setReceiverData] = useState();
-  const [conversation, setConversation] = useState();
-  const [message , setMessage] = useState("");
-  const msgContainerRef = useRef(null); // Reference for the message container
  
-  
+  const [conversation, setConversation] = useState();
+  const [message, setMessage] = useState("");
+  const [image, setImage] = useState("");
+  const msgContainerRef = useRef(null); // Reference for the message container
 
-  Realtime(conversation , setConversation)
  
 
   const fetchConversation = async () => {
     const msg = await axios.get(
       "/api/chat/" + context[1],
       {
-        headers: { authorization: authUser.token }
+        headers: { authorization: authUser.token },
       }
     );
     setConversation(msg.data);
-    console.log("Converstaion: ",conversation)
   };
- 
 
   const sendMessage = async () => {
-    if(message){
-      const res = await axios.post("/api/chat/send/"+context[1] , {message} , {
-        headers: { authorization: authUser.token }
-      }) 
-      console.log(res.data)
+    if (message || image) {
+      const res = await axios.post(
+        "/api/chat/send/" + context[1],
+        { message, image },
+        {
+          headers: { authorization: authUser.token },
+        }
+      );
       fetchConversation();
-      setMessage(""); // Clear the message input field after sending
+      setMessage("");
+      setImage("");
     }
   };
 
@@ -52,13 +54,30 @@ const Chatwindow = ({ context }) => {
     setReceiverData(receiver.data);
   };
 
+  const handleImage = (event) => {
+    const selectedImage = event.target.files[0];
+    setFileToBase(selectedImage);
+  };
+
+  const setFileToBase = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setImage(reader.result);
+    };
+  };
+
   useEffect(() => {
     if (context) {
+
       getReceiverData();
       fetchConversation();
-      
+      setMessage("");
+      setImage("");
     }
   }, [context]);
+
+  // Realtime(conversation, setConversation );
 
   useEffect(() => {
     // Scroll to the bottom of the message container when conversation updates
@@ -67,11 +86,10 @@ const Chatwindow = ({ context }) => {
     }
   }, [conversation]);
 
-  // Handle Enter key press to send message
   const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
-      e.preventDefault(); // Prevent the default behavior of Enter key (submitting the form)
-      sendMessage(); // Call sendMessage function when Enter is pressed
+    if (e.key === "Enter") {
+      e.preventDefault();
+      sendMessage(); 
     }
   };
 
@@ -83,54 +101,28 @@ const Chatwindow = ({ context }) => {
             <img src={receiverData.profilepic} alt="" />
           </div>
           <div className="namenstatus">
-            <div className="name-space">{receiverData.username}</div>
+            <div className="name-space">{receiverData.fullname}</div>
             <div className="status-space" style={{ fontSize: 10 }}>
-              Last seen
+              {onlineUsers.includes(context[1]) ? <div><img src="/activedot2.png" className="" style={{height: "8px" , width:"8px"}}/> online </div> : "offline"}
             </div>
           </div>
         </div>
       )}
 
-      <div className="msg-container" ref={msgContainerRef}>
-        {/* Messages are rendered inside this container */}
-        {conversation && conversation.map((msg, index) => (
-  <div
-    className={`msgwindow ${msg.senderId === authUser._id ? 'sent' : 'received'}`} // Set the class based on sent or received
-    key={index}
-  >
-    <div className="message">
-    {msg.message}
-    </div>
-    
-    <div className="timestamp">
-    {(() => {
-    const date = new Date(msg.createdAt);
-    const hours = date.getHours();
-    const minutes = date.getMinutes();
-    const ampm = hours >= 12 ? 'PM' : 'AM';
-    const formattedHours = hours % 12 || 12;
-    return `${formattedHours}:${minutes < 10 ? '0' : ''}${minutes} ${ampm}`;
-  })()}
-    </div>
-    
-   </div>
-))}
-        
+      <div className="msg-container" ref={msgContainerRef}>    
+          {conversation && <MessageList conversation={conversation} />}
       </div>
 
-      <form onSubmit={(e) => { e.preventDefault(); sendMessage(); }}>
-        <div className="msginput">
-          <input
-            type="text"
-            className="msginput-field"
-            placeholder=" Type message here......"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            onKeyPress={handleKeyPress} 
-          />
-          
-        </div>
-      </form>
+      <ChatInput
+        message={message}
+        image={image}
+        setMessage={setMessage}
+        setImage={setImage}
+        sendMessage={sendMessage}
+        handleImage={handleImage}
+        handleKeyPress={handleKeyPress}
+        receiverData={receiverData}
+      />
     </div>
   );
 };

@@ -12,10 +12,12 @@ export const SocketContextProvider = ({children})=>{
     const [socket,setSocket] =useState(null)
     const [onlineUsers , setOnlineUsers] = useState([])
     const {authUser} = useAuthContext();
+    
+    
 
     useEffect(()=>{
         if(authUser){
-            const socketUrl = window.location.origin;
+            const socketUrl = "http://localhost:5000";
             const socket = io(socketUrl,{
                 query:{
                     userId:authUser._id,

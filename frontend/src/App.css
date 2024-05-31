@@ -5,8 +5,7 @@
 }
 
 body{
-    background-image: url('shinobu_copy.jpg');
-    background-size: cover; /* Cover the entire background */
-  background-repeat: no-repeat;
-  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    background-color: rgb(251, 237, 203);
+    font-family:cursive
+  
 }

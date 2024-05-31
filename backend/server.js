@@ -5,12 +5,15 @@ const authRoute = require('./routes/authRoute');
 const messageRoute = require('./routes/messageRoute');
 const userRoute = require('./routes/userRoute');
 const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
 const { app, server } = require('./socket/socket');
 
-dotenv.config();
+app.use(bodyParser.json({limit: '50mb'}));
+dotenv.config({ path: path.resolve(__dirname, './.env') });
 app.use(cookieParser());
+
 app.use(express.json());
 app.use(cors({
     origin: true,

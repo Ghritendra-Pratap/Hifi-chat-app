@@ -1,10 +1,13 @@
 .sidebar{
-    background-color:rgb(137, 114, 143, 0.2);
+    background-color:white;
     height: 100%;
-    color: white;
+    
     overflow-y: auto;
     padding-left:20px ;
     border: transparent !important;
+    border-radius: 20px;
+    display: grid;
+    grid-template-rows: 50px 80px ; 
     
 }
 
@@ -24,13 +27,14 @@
     margin-left: 8px;
     cursor: pointer;
     
+    
 }
 
 .search-img:hover{
     background-color:rgb(200, 168, 219) ;
 }
 input::placeholder{
-    color: rgb(233, 231, 234);
+    
 }
 
 img{
@@ -39,7 +43,7 @@ img{
     border-radius: 50px;
 }
 .search{
-    margin: 10px 0px;
+    margin: 20px 0px;
     max-width: 90% ;
     display: flex;
 
@@ -47,16 +51,17 @@ img{
 }
 
 .searchName{
-    background-color:  rgb(173, 161, 177);
-    border-radius: 5px;
-    border: transparent;
+    background-color: rgb(250, 248, 248);
+    border-radius: 0px;
+    border-bottom: 1px solid rgb(80, 69, 82);
     outline: none;
     max-width: 90% ;
-    color: white;
+    color: black;
 }
 .userlist{
     margin-top: 20px;
     font-weight: bold;
+    grid: 9;
 }
 
 .user-content{
@@ -72,15 +77,15 @@ img{
 .user-name{
     flex: 9;
     position: relative;
-    top: 6px;
+    top: 4px;
     font-size: small;
     cursor: pointer;
 }
 
 .user-content:hover{
-    background-color:rgb(132, 96, 141);
-    border-radius: 20px;
-    padding: 2px;
+    background-color:rgb(156, 180, 248);
+    border-radius: 5px;
+    padding: 6px 4px 2px 4px;
     margin-right: 20px;
 }
 
